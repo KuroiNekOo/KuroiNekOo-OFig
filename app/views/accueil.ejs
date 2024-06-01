@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<%- include('./partials/head') %>
+
+<body>
+
+  <!-- Navigation -->
+  <%- include('./partials/header') %>
+
+  <!-- Page Content -->
+  <main class="container container-main">
+
+    <div class="row">
+
+      <aside class="col-lg-3">
+
+        <%- include('./partials/leftMenu') %>
+
+      </aside>
+      <!-- /.col-lg-3 -->
+
+      <section class="col-lg-9">
+
+        <div class="row">
+
+          <% figurines.forEach((figurine, index) => { %>
+            <article class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="/article/<%= figurine.id %>">
+                  <img class="card-img-top" src="/images/<%= figurine.name.toLowerCase() %>.png" alt="">
+                  <div class="badge-category badge badge-pill badge-<%= figurine.category.toLowerCase() %>"><%= figurine.category %></div>
+                </a>
+                <div class="card-body">
+                  <h2 class="card-title h4">
+                    <a href="/article/<%= figurine.id %>"><%= figurine.name %></a>
+                  </h2>
+                  <h3 class="h5">$<%= figurine.price %></h3>
+                  <p class="card-text"><%= figurine.description %></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">
+                    <% for (let i = 0; i < noteMax; i++) { %> 
+                      <% if (i < avgAllFigRating[index].avg) { %>
+                        &#9733;
+                      <% } else { %>
+                        &#9734;
+                      <% } %>
+                    <% } %>
+                  </small>
+                  <a href="/bookmarks/add/<%= figurine.id %>" class="link-add-bookmarks">+ Ajouter aux favoris</a>
+                </div>
+              </div>
+            </article>
+          <% }) %>
+
+        </div>
+        <!-- /.row -->
+
+      </section>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </main>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <%- include('./partials/footer') %>
+
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.15/bootstrap-native-v4.min.js"></script>
+
+</body>
+
+</html>
